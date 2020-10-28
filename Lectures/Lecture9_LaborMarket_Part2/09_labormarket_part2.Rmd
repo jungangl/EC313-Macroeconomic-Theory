@@ -1,0 +1,411 @@
+---
+title: "Labor Market - Part 2"
+subtitle: "EC 313, Macroeconomics"
+author: "Alex Li"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'metropolis', 'metropolis-fonts', 'my-css.css']
+    # self_contained: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: inverse, center, middle
+
+```{R, setup, include = F}
+options(htmltools.dir.version = FALSE)
+library(pacman)
+p_load(
+  broom, here, tidyverse,
+  latex2exp, ggplot2, ggthemes, viridis, extrafont, gridExtra,
+  kableExtra,
+  dplyr, magrittr, knitr, parallel
+)
+# Define pink color
+red_pink <- "#e64173"
+turquoise <- "#20B2AA"
+grey_light <- "grey70"
+grey_mid <- "grey50"
+grey_dark <- "grey20"
+# Dark slate grey: #314f4f
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 7,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+# A blank theme for ggplot
+theme_empty <- theme_bw() + theme(
+  line = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  plot.margin = structure(c(0, 0, -0.5, -1), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_simple <- theme_bw() + theme(
+  line = element_blank(),
+  panel.grid = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text.x = element_text(size = 18, family = "STIXGeneral"),
+  axis.text.y = element_blank(),
+  axis.ticks = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  # plot.margin = structure(c(0, 0, -1, -1), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes_math <- theme_void() + theme(
+  text = element_text(family = "MathJax_Math"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = "grey70",
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes_serif <- theme_void() + theme(
+  text = element_text(family = "MathJax_Main"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = "grey70",
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes <- theme_void() + theme(
+  text = element_text(family = "Fira Sans Book"),
+  axis.title = element_text(size = 18),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = grey_light,
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+```
+
+# Book Chapter 6
+
+---
+
+class: inverse, middle, center
+
+# Review
+
+---
+
+# Review
+
+## Labor Market Equilibrium
+
+Labor Supply or Wage-Setting Relation (WS): 
+
+$$\frac{W}{P} = F\underbrace{(u, z)}_{(-, +)}$$
+
+Labor Demand or Price-Setting Relation (PS): 
+
+$$\frac{W}{P} = \frac{A}{1 + m}$$
+
+---
+
+# Review
+
+## Labor Market Equilibrium
+
+This labor market model is trying to explain .hi[two variables of interest] in our economy:
+
+- Real Wage $\frac{W}{P}$
+
+- Unemployment Rate $u$
+
+<center>
+ <img src="FIGURES/LME.PNG" width="500" height="300">
+</center>
+
+---
+
+# Review
+
+## Labor Market Equilibrium
+
+- __The Equilibrium Real Wage__ $\frac{W}{P} = \frac{A}{1 + m}$
+
+- __The Equilibrium Unemployment Rate__ $u_n$ called the natural rate of unemployment.  
+
+---
+
+class: inverse, middle, center
+
+# Applications
+
+---
+
+# Applications
+
+## Unemployment Benefits
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if unemployment benefits increase? 
+
+--
+
+- The (Labor Supply) WS Curve .hi[shifts up]
+
+  - $z$ increases, WS: $\frac{W}{P} = F(u, z)$, $\frac{W}{P}$ increases for a given $u$. 
+
+- The (Labor Demand) PS Curve .hi[doesn't move]
+
+---
+
+# Applications
+
+## Unemployment Benefits
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if unemployment benefits increase? 
+
+<center>
+ <img src="FIGURES/LME.PNG" width="400" height="250">
+</center>
+
+---
+
+# Applications
+
+## Unemployment Benefits
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if unemployment benefits increase? 
+
+<center>
+ <img src="FIGURES/LME2.PNG" width="400" height="250">
+</center>
+
+--
+
+__Equilibrium Real Wage__ doesn't change
+
+__Natural Rate of Unemployment Rate__ increases. (Think about Europe)
+
+---
+
+# Applications
+
+## Anti-trust Enforcement
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if a country increases its anti-trust enforcement (meaning government reduces monopoly power)? 
+
+--
+
+- The (Labor Supply) WS Curve .hi[doesn't move]
+
+- The (Labor Demand) PS Curve .hi[shifts up]
+
+  - $m$ decreases, WS: $\frac{W}{P} = \frac{A}{1 + m}$, $\frac{W}{P}$ increases.
+
+---
+# Application
+
+## Anti-trust Enforcement
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if a country increases its anti-trust enforcement (meaning government reduces monopoly power)? 
+
+<center>
+ <img src="FIGURES/LME.PNG" width="400" height="250">
+</center>
+
+---
+# Application
+
+## Anti-trust Enforcement
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if a country increases its anti-trust enforcement (meaning government reduces monopoly power)? 
+
+<center>
+ <img src="FIGURES/LME3.PNG" width="400" height="250">
+</center>
+
+--
+
+__Equilibrium Real Wage__ increases.
+
+__Natural Rate of Unemployment Rate__ decreases. 
+
+---
+# Application
+
+## Technology Advancement
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if a country experiences a major technology advancement? 
+
+--
+
+- The (Labor Supply) WS Curve .hi[doesn't move]
+
+- The (Labor Demand) PS Curve .hi[shifts up]
+
+  - $m$ decreases, WS: $\frac{W}{P} = \frac{A}{1 + m}$, $\frac{W}{P}$ increases.
+  
+---
+# Application
+
+## Technology Advancement
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if a country experiences a major technology advancement? 
+
+<center>
+ <img src="FIGURES/LME.PNG" width="400" height="250">
+</center>
+
+---
+# Application
+
+## Technology Advancement
+
+.hi[Question]: What happens to equilibrium real-wage and the natural rate of unemployment if a country experiences a major technology advancement? 
+
+<center>
+ <img src="FIGURES/LME3.PNG" width="400" height="250">
+</center>
+
+--
+
+__Equilibrium Real Wage__ increases.
+
+__Natural Rate of Unemployment Rate__ decreases. 
+
+---
+
+class: inverse, middle, center
+
+# Medium-Run Output
+
+---
+
+# Medium-Run Output
+
+## Derive Output
+
+Recall: the Labor Market Model is a .hi[medium-run] model. 
+
+The .hi[variables of interest] in the labor market model are: __real wage__ and __unemployment rate__. 
+
+__Question: Is output an endogeneou variable?__
+
+We need to know whether output depends on __real wage__ or __unemployment rate__. If output depends on either one of them, the output is endogeneous.
+
+---
+
+# Medium-Run Output
+
+## Derive Output
+
+The answer is that __output is indeed endogeneous__.
+
+Recall:
+
+- Output is $Y = A * \color{#e64173}{N}$ where $N$ is the number of people who are employeed. 
+
+- By definition $u = \frac{L - N}{L}$, where $L$ is the labor force. 
+
+- Transform $u = \frac{L - N}{L}$, we get $\color{#e64173}{N = (1 - u) L}$
+
+- In conclusion, $Y = A * \color{#e64173}{N} = A * \color{#e64173}{(1 - u) L}$
+
+---
+
+# Medium-Run Output
+
+## Derive Output
+
+The answer is that __output is indeed endogeneous__. In conclusion, 
+$$Y = A * (1 - u) L$$
+__Hence $Y$ depends on $u$ which is one of the variables of interest.__
+
+When $u_n$ is the natural rate of unemployment (equilibrium unemployment rate), we have the following relation for equilibrium output:
+
+$$Y_n = A(1 - u_n)L$$
+Here $Y_n$ is called .hi[the natural level of output]. 
+
+---
+
+# Medium-Run Output
+
+## Why "Natural"
+
+.hi[Takeaway]: The natural level of output, Yn, associated with a given natural rate of unemployment, un, is such that the Price Setting and Wage Setting relations are equal!
+
+$Y_n$ and $u_n$ are both .hi[natural] because we assumed .hi.purple[prices equal expected prices]. 
+
+---
+
+# Medium-Run Output
+
+## Conclusion
+
+- __Labor Market Equilibrium__ is determined where $\underbrace{WS}_{Labor Supply} = \underbrace{PS}_{LaborDemand}$
+
+- __The Medium Run Equilibrium__ is determined where WS = PS with the assumption .hi[Price equals Expected Price]! ( $P = P^e$ ).
+
+- __In the medium run__, equilibrium output is entirely determined by the labor market!
+
+- __Q__: What's next?
+
+- __A__: Look at the interaction of Short Run Policy (IS-LM) and the Medium Run (Labor Market)!
+
+---
+
+# Medium-Run Output
+
+## Conclusion
+
+We have now covered two cases:
+
+- (Short-run) IS-LM equilibrium (Ch. 5) - Goods Market and Money Market
+
+- (Medium run) Labor Market Equilibrium (Ch. 6)
+
+---
+
+# Medium-Run Output
+
+## Conclusion
+
+Using these four markets, we can derive (.hi[after the midterm]):
+
+- __Aggregate Supply Relation__: captures the effect of output on the price level. Derived using Labor Market Equilibrium.
+
+  - __Note__: Labor Market determines Aggregate Supply because $Y = A*N$
+
+- __Aggregate Demand Relation__: captures the effect of price level on output. Derived using the IS-LM Equilibrium.
+
+  - __Note__: Goods and Money Market Eqm Determine Aggregate Demand because they capture consumer behavior!
+
+
+
+---
+exclude: true
+
+```{R, generate pdfs, include = F, eval = T}
+system("decktape remark 09_labormarket_part2.html 09_labormarket_part2.pdf --chrome-arg=--allow-file-access-from-files")
+```

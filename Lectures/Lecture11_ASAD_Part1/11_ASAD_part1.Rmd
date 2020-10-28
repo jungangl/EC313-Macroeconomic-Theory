@@ -1,0 +1,685 @@
+---
+title: "The ASAD Model - Part 1"
+subtitle: "EC 313, Macroeconomics"
+author: "Alex Li"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'metropolis', 'metropolis-fonts', 'my-css.css']
+    # self_contained: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: inverse, center, middle
+
+```{R, setup, include = F}
+options(htmltools.dir.version = FALSE)
+library(pacman)
+p_load(
+  broom, here, tidyverse,
+  latex2exp, ggplot2, ggthemes, viridis, extrafont, gridExtra,
+  kableExtra,
+  dplyr, magrittr, knitr, parallel
+)
+# Define pink color
+red_pink <- "#e64173"
+turquoise <- "#20B2AA"
+grey_light <- "grey70"
+grey_mid <- "grey50"
+grey_dark <- "grey20"
+# Dark slate grey: #314f4f
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 7,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+# A blank theme for ggplot
+theme_empty <- theme_bw() + theme(
+  line = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  plot.margin = structure(c(0, 0, -0.5, -1), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_simple <- theme_bw() + theme(
+  line = element_blank(),
+  panel.grid = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text.x = element_text(size = 18, family = "STIXGeneral"),
+  axis.text.y = element_blank(),
+  axis.ticks = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  # plot.margin = structure(c(0, 0, -1, -1), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes_math <- theme_void() + theme(
+  text = element_text(family = "MathJax_Math"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = "grey70",
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes_serif <- theme_void() + theme(
+  text = element_text(family = "MathJax_Main"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = "grey70",
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes <- theme_void() + theme(
+  text = element_text(family = "Fira Sans Book"),
+  axis.title = element_text(size = 18),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = grey_light,
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+```
+
+# Book Chapter 7
+
+---
+
+class: inverse, middle, center
+
+# Review
+
+---
+
+# Review
+
+## Wage-Setting Relation:
+
+- Workers (Labor Supply) ask wage based on $W = P^e F(u,z)$ 
+
+- We assumed $P^e = P$. This simplifies the WS equations to $W = P F(u,z)$  and __it is this assumption that allows us to solve for__ $u_n$.
+
+- Under this assumption, the equilibrium unemployment rate is called .hi[the natural rate of unemployment].
+  
+- This assumption allows us to get the .hi.purple[real wage] asked by workers $\frac{W}{P} = F(u, z)$
+
+
+
+---
+
+# Review
+
+## Price-Setting Relation:
+
+- We assume that Y = AN, __where A is technology, and N is the number of workers__.
+
+- For __one extra unit of product__, firms need to hire .hi[1/A] more units of labor.
+
+- Therefore, the marginal cost of production is .hi[W/A].
+
+- Firms hold monopoly power: .hi[P = (1 + m) W/A], where __m is the mark-up.__
+
+- We can write the .hi.purple[real wage] offered by firms is .hi.purple[W/P = (1 + m)/A]
+
+---
+
+# Review
+
+## Labor Market Equilibrium
+
+__Set the real wage asked workers equal to offered by firms__:
+
+
+$$F(u, z) = \frac{A}{1 + m}$$
+---
+
+# Review
+
+## Labor Market Equilibrium
+
+__Set the real wage asked workers equal to offered by firms__:
+
+
+$$F(u_n, z) = \frac{A}{1 + m}$$
+$u_n$ is the natural rate of unemployment
+
+According to the equilibrium equation, we can study how $u_n$ responds to changes in $z, A, m$
+
+- $z$ increases $u_n$ increases
+
+- $A$ increases $u_n$ decreases
+
+- $m$ increases $u_n$ increases
+
+---
+class: inverse, middle, center
+
+# Overview
+
+---
+
+# Overview
+
+## Medium Run
+
+- Now we want to study the behavior of the economy in the __medium run__. 
+
+- A hallmark of the medium run is that .hi[prices change]!
+
+- We need to have a model to incorporate __price__ as a variable of interest.
+
+- The other variable of interest is __output__ (GDP). 
+
+- We need to build a model for .hi[Aggregate Supply] that models the behaviors of __price and output__. 
+
+---
+
+# Overview
+
+## Short Run v.s Medium Run
+
+Short-run story For aggregate supply:
+
+- .hi[Demand goes up]
+
+- .hi[Firms produce more to meet the demand]...
+
+- __...without changing__
+
+  - i) the number of people they hire
+  
+  - ii) prices of their products
+  
+  - iii) wages they offer to their employees.
+
+---
+
+# Overview
+
+## Short Run v.s Medium Run
+
+Medium run story For aggregate supply:
+
+- .hi[Demand goes up]
+
+- .hi[Firms produce more to meet the demand] __by hiring more workers__. 
+
+- __Conseuqences__: 
+
+  - i) Nominal wage goes up
+  
+  - ii) More costly to produce, so the price goes up.
+  
+  - iii) Higher price makes workers ask for a higher nominal wage.
+  
+  - __goes back to i) ...__
+  
+---
+
+# Overview
+  
+## What's Next
+
+We have now covered two cases:
+
+- (Short-run) IS-LM equilibrium (Ch. 5) - Goods Market and Money Market
+
+- (Medium run) Labor Market Equilibrium (Ch. 6)
+
+---
+
+# Overview
+  
+## What's Next
+
+(Short-run) IS-LM equilibrium (Ch. 5) - Goods Market and Money Market
+
+- Gives us .hi[Aggregate Demand Relation]: captures __the effect of price level on output__. 
+
+- Note that IS-LM captures __consumer behaviors__, that's why it's called .hi[AD] (aggregate demand) relation. 
+
+---
+# Overview
+  
+## What's Next
+
+(Medium run) Labor Market Equilibrium (Ch. 6)
+
+- Gives us .hi[Aggregate Supply Relation]: captures __the effect of output level on price__. 
+
+- Note that Labor Market captures __firms behaviors__, that's why it's called .hi[AS] (aggregate supply) relation. 
+
+---
+class: inverse, middle, center
+
+# Aggregate Supply Relation
+---
+
+# Aggregate Supply Relation
+
+## Labor Market Equilibrium Revisited
+
+__The AS Relation represents (medium run) equilibrium in the Labor Market.__
+
+Recall labor supply (WS) and labor demand (PS): 
+
+\begin{align}
+\text{WS} & : W = P^eF(u,z)\\
+\text{PS} & : P = (1 + m) W / A
+\end{align}
+
+Before we assumed $P = P^e$ to solve for a specific equilibrium, $u_n$. __We now drop this assumption!__
+
+Why?
+
+--
+
+Because we want to .hi[model the behavior of price] $P$, which is one of the variables of interest in the AS-AD model. 
+
+---
+
+# Aggregate Supply Relation
+
+## Labor Market Equilibrium Revisited
+
+__The AS Relation represents (medium run) equilibrium in the Labor Market.__
+
+From now on, let's make a simplifying assumption: __technology A = 1__. This assumption is good for .hi[the medium run]. 
+
+Recall labor supply (WS) and labor demand (PS): 
+
+\begin{align}
+\text{WS} & : \color{#e64173}{W} = P^eF(u,z)\\
+\text{PS} & : P = (1 + m) \color{#e64173}{W} 
+\end{align}
+
+Combining the above two equations, we get the __labor market equilibrium equation__:
+
+$$P = (1 + m) P^eF(u,z)$$
+
+---
+
+# Aggregate Supply Relation
+
+## Labor Market Equilibrium Revisited
+
+We get the __labor market equilibrium equation__:
+
+$$P = (1 + m) P^eF(u,z)$$
+__Q__: We want an equation for .hi[P] and .hi[Y] . How do we get there?
+
+__A__: Note .hi.purple[u] is related to .hi[Y]. Sub in for u! 
+
+- By definition $u = \frac{L-N}{L} = 1 - \frac{\color{#e64173}{N}}{L}$. 
+
+- Also $\color{#e64173}{Y = N}$
+
+- Hence $u = 1 - \frac{Y}{L}$
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation
+
+We get the __labor market equilibrium equation__ in terms of .hi[P] and .hi[Y]. This is the AS Relation:
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+<center>
+ <img src="FIGURES/AS.PNG" width="600" height="80">
+</center>
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+__Q: If Y increases, what happens to P? __
+
+__A: P increases.__
+
+--
+
+Mathematically
+
+- .hi[Y increases]
+
+- $1 - \frac{Y}{L}$ goes down
+
+- $F(1 - \frac{Y}{L}, z)$ goes up
+
+- .hi[P goes up]
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+__Q: If Y increases, what happens to P? __
+
+__A: P increases.__
+
+--
+
+Intuitively
+
+- .hi[Y increases]
+
+- Unemployment rate decreases
+
+- Workers ask for a higher wage
+
+- More expensive for firms to produce goods
+
+- .hi[Firms increase price P].
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation - Moving Along
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+__Q: If Y increases, what happens to P? __
+
+__A: P increases. (Moving Along the AS Curve)__
+
+
+<center>
+ <img src="FIGURES/AS_graph.PNG" width="410" height="300">
+</center>
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation - Shifting
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+__Q: If monopoly power m increases, what happens to P? __
+
+__A: P increases. Shifting Up__
+
+
+<center>
+ <img src="FIGURES/AS_graph.PNG" width="410" height="300">
+</center>
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation - Shifting
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+__Q: If expected price $P^e$ increases, what happens to P? __
+
+__A: P increases. Shifting Up__
+
+
+<center>
+ <img src="FIGURES/AS_graph.PNG" width="410" height="300">
+</center>
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation - Shifting
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+__Q: If Labor Force increases, what happens to P? __
+
+__A: P decreases Shifting Down__
+
+
+<center>
+ <img src="FIGURES/AS_graph.PNG" width="410" height="300">
+</center>
+
+---
+
+# Aggregate Supply Relation
+
+## AS Relation - Shifting
+
+\begin{align}
+P = (1 + m) P^eF(1 - \frac{Y}{L},z) 
+\end{align}
+
+__Q: If reservation wage, z, increases, what happens to P? __
+
+__A: P increases Shifting Up__
+
+
+<center>
+ <img src="FIGURES/AS_graph.PNG" width="410" height="300">
+</center>
+
+---
+class: inverse, middle, center
+
+# Aggregate Demand Relation
+
+---
+
+# Aggregate Demand Relation
+
+## IS-LM Equilibrium Revisited
+
+__The IS-LM model captures the (short-run) equilibrium in the Goods and Money Market.__
+
+.hi[Recall IS-LM]: 
+
+\begin{align}
+\text{Goods Market IS} & : Y = f^C(Y-T, i) + f^I(Y, i) + G\\
+\text{Money Market LM} & : \frac{M}{P} = Y L(i)
+\end{align}
+
+---
+
+# Aggregate Demand Relation
+
+\begin{align}
+\text{Goods Market IS} & : Y = f^C(Y-T, i) + f^I(Y, i) + G\\
+\text{Money Market LM} & : \frac{M}{P} = Y L(i)
+\end{align}
+
+
+<center>
+ <img src="FIGURES/AD_relation.PNG" width="300" height="450">
+</center>
+
+
+---
+
+# Aggregate Demand Relation
+
+__Every point on the AD Curve represents a potential SR Equilibrium in the IS-LM model!__
+
+
+<center>
+ <img src="FIGURES/AD_relation.PNG" width="300" height="450">
+</center>
+
+---
+
+# Aggregate Demand Relation
+
+## AD Relation
+
+__Q: If P increases, what happens to Y__
+
+__A: Y decreases__
+
+--
+
+Intuitively:
+
+- .hi[P increases]
+
+- Nominal GDP increases
+
+- Money Demand increases
+
+- More people sell bonds, bonds price goes down, the interest rate goes up
+
+- Consumption and Investment goes down
+
+- Output .hi[Y goes down]
+
+---
+
+# Aggregate Demand Relation
+
+## AD Relation - Moving Along
+
+\begin{align}
+\text{Goods Market IS} & : Y = f^C(Y-T, i) + f^I(Y, i) + G\\
+\text{Money Market LM} & : \frac{M}{P} = Y L(i)
+\end{align}
+
+__Q: If P increases, what happens to Y__
+
+__A: Y decreases__
+
+<center>
+ <img src="FIGURES/AD_graph.PNG" width="350" height="250">
+</center>
+
+---
+
+# Aggregate Demand Relation
+
+## AD Relation - Shifting
+
+\begin{align}
+\text{Goods Market IS} & : Y = f^C(Y-T, i) + f^I(Y, i) + G\\
+\text{Money Market LM} & : \frac{M}{P} = Y L(i)
+\end{align}
+
+__Q: If T increases, what happens to Y__
+
+__A: Y decreases, Shift Left__
+
+<center>
+ <img src="FIGURES/AD_graph.PNG" width="350" height="250">
+</center>
+
+---
+
+# Aggregate Demand Relation
+
+## AD Relation - Shifting
+
+\begin{align}
+\text{Goods Market IS} & : Y = f^C(Y-T, i) + f^I(Y, i) + G\\
+\text{Money Market LM} & : \frac{M}{P} = Y L(i)
+\end{align}
+
+__Q: If G increases, what happens to Y__
+
+__A: Y increases, Shift Right__
+
+<center>
+ <img src="FIGURES/AD_graph.PNG" width="350" height="250">
+</center>
+
+
+---
+
+# Aggregate Demand Relation
+
+## AD Relation - Shifting
+
+\begin{align}
+\text{Goods Market IS} & : Y = f^C(Y-T, i) + f^I(Y, i) + G\\
+\text{Money Market LM} & : \frac{M}{P} = Y L(i)
+\end{align}
+
+__Q: If M increases, what happens to Y__
+
+__A: Y increases, Shift Right__
+
+<center>
+ <img src="FIGURES/AD_graph.PNG" width="350" height="250">
+</center>
+
+---
+
+# Aggregate Demand Relation
+
+
+<center>
+ <img src="FIGURES/AD_summary.PNG" width="830" height="480">
+</center>
+
+
+---
+
+# Aggregate Demand Relation
+
+
+<center>
+ <img src="FIGURES/AD_AS_recap.PNG" width="830" height="530">
+</center>
+
+---
+exclude: true
+
+```{R, generate pdfs, include = F, eval = T}
+system("decktape remark 11_ASAD_part1.html 11_ASAD_part1.pdf --chrome-arg=--allow-file-access-from-files")
+```
+
+

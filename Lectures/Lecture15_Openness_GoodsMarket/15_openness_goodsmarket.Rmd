@@ -1,0 +1,670 @@
+---
+title: "Openness in the Goods Market"
+subtitle: "EC 313, Macroeconomics"
+author: "Alex Li"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'metropolis', 'metropolis-fonts', 'my-css.css']
+    # self_contained: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: inverse, center, middle
+
+```{R, setup, include = F}
+options(htmltools.dir.version = FALSE)
+library(pacman)
+p_load(
+  broom, here, tidyverse,
+  latex2exp, ggplot2, ggthemes, viridis, extrafont, gridExtra,
+  kableExtra,
+  dplyr, magrittr, knitr, parallel
+)
+# Define pink color
+red_pink <- "#e64173"
+turquoise <- "#20B2AA"
+grey_light <- "grey70"
+grey_mid <- "grey50"
+grey_dark <- "grey20"
+# Dark slate grey: #314f4f
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 7,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+# A blank theme for ggplot
+theme_empty <- theme_bw() + theme(
+  line = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  plot.margin = structure(c(0, 0, -0.5, -1), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_simple <- theme_bw() + theme(
+  line = element_blank(),
+  panel.grid = element_blank(),
+  rect = element_blank(),
+  strip.text = element_blank(),
+  axis.text.x = element_text(size = 18, family = "STIXGeneral"),
+  axis.text.y = element_blank(),
+  axis.ticks = element_blank(),
+  plot.title = element_blank(),
+  axis.title = element_blank(),
+  # plot.margin = structure(c(0, 0, -1, -1), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes_math <- theme_void() + theme(
+  text = element_text(family = "MathJax_Math"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = "grey70",
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes_serif <- theme_void() + theme(
+  text = element_text(family = "MathJax_Main"),
+  axis.title = element_text(size = 22),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = "grey70",
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+theme_axes <- theme_void() + theme(
+  text = element_text(family = "Fira Sans Book"),
+  axis.title = element_text(size = 18),
+  axis.title.x = element_text(hjust = .95, margin = margin(0.15, 0, 0, 0, unit = "lines")),
+  axis.title.y = element_text(vjust = .95, margin = margin(0, 0.15, 0, 0, unit = "lines")),
+  axis.line = element_line(
+    color = grey_light,
+    size = 0.25,
+    arrow = arrow(angle = 30, length = unit(0.15, "inches")
+  )),
+  plot.margin = structure(c(1, 0, 1, 0), unit = "lines", valid.unit = 3L, class = "unit"),
+  legend.position = "none"
+)
+```
+
+# Book Chapter 18 & 19
+
+---
+
+class: inverse, middle, center
+
+# Overview
+
+---
+
+# Overview
+
+## Closed Economy Assumption
+
+We have been assuming the economy is closed in the previous chapters.
+
+This is not the reality. The world is connected - we can see this from the great recession in 2009. 
+
+
+<center>
+ <img src="figures/globalrecession.png" width="550" height="300">
+</center>
+
+---
+
+# Overview
+
+## Three Dimensions of Openness
+
+- Openness in .hi[goods markets] (Lecture 15)
+
+- Openness in .hi[financial markets] (Lecture 16)
+
+- Openness in .hi[factor markets] (Won't be Covered)
+
+---
+
+# Overview
+
+## Openness in goods markets
+
+- Choices between __domestic goods and foreign goods__. 
+  
+- Tariffs (taxes on imported goods) __lower the openness in goods market__. 
+  
+- Quotas (restrictions on the quantity of goods that can be imported) __lower the openness in goods market__. 
+---
+
+class: inverse, middle, center
+
+# Exchange Rates
+
+---
+
+# Exchange Rates
+
+## Export and Import Ratio to GDP
+
+Since 1960, exports and imports have more than doubled in relation to GDP. The United States has become a much more open economy.
+
+<center>
+ <img src="figures/exportandimport.png" width="550" height="300">
+</center>
+
+---
+
+# Exchange Rates
+
+## Real Exchange Rate $\epsilon$
+
+When goods markets are open, domestic consumers face a second decision: whether to buy .hi[domestic goods] or to buy .hi[foreign goods].
+
+This decision is affected by __the price of domestic goods relative to foreign goods__. We call this relative price .hi[the real exchange rate].  
+
+The real exchange rate is __not directly observable__.
+
+---
+# Exchange Rates
+
+## Nominal Exchange Rate $E$
+
+
+What you see in newspapers are __nominal exchange rates__. 
+
+Say US dollar is the domestic currency, __the nominal exchange rate would be the price of a dollar in terms of other currency__ (for example British Pounds). 
+
+If E goes up, we say dollars appreciate. If E goes down, we say dollars deppreciate. 
+
+<center>
+ <img src="figures/exchangerate.png" width="650" height="220">
+</center>
+
+---
+# Exchange Rates
+
+## Nominal to Real: $E \rightarrow \epsilon$
+
+How to compute the Real Exchange Rate:
+
+- The price of U.S. goods in dollars is P.
+
+- The price of British goods in pounds is P*.
+
+- The prices are __GDP deflators__.
+
+<center>
+ <img src="figures/nominaltoreal.png" width="600" height="180">
+</center>
+
+---
+# Exchange Rates
+
+## Nominal to Real: $E \rightarrow \epsilon$
+
+If the real exchange rate between the United States and the United Kingdom increases by 10%, this tells us U.S. goods are now 10% more expensive relative to British goods than they were before.
+
+<center>
+ <img src="figures/realvsnominal.png" width="600" height="380">
+</center>
+
+---
+
+# Exchange Rates
+
+## Multilateral Real Exchange Rate
+
+- The US doesn't just trade with the UK. It trades with .hi[the rest of the world].
+
+- There are probably over than 100 real exchange rates that matter (to different extents).
+
+- There is a way to combine the 100 rates together and get a multilateral real exchange rate. This is the price in US relative to the rest of the world. 
+
+---
+
+# Exchange Rates
+
+## Multilateral Real Exchange Rate
+
+“Dollar Cycle”, or more graphically, “Dance of the Dollar”
+
+<center>
+ <img src="figures/multilateralrate.png" width="600" height="380">
+</center>
+
+---
+
+# Exchange Rates
+
+## Import and Real Exchange Rate
+
+When the real exchange rate is higher,
+
+- the goods price in the US is more expensive than the rest of the world. 
+
+- people in the US would want to buy more goods from a broad. 
+
+- import increases
+
+.hi[Import (IM) increases as real exchange rate goes up.]
+
+---
+
+class: inverse, middle, center
+
+# Demand
+
+---
+
+# Demand
+
+## Domestic Demand for Goods
+
+Domestic demand for goods have three components:
+
+- __Consumption__: .hi[C]
+
+- __Investment__: .hi[I]
+
+- __Government Spending__: .hi[G]
+
+In a closed economy, 
+
+.hi.purple[Domestic Demand for Goods] = .hi.turquoise[Demand for Domestic Goods]
+
+__The domestic demand for goods__ can be written as 
+
+$$D = C + I + G$$
+
+---
+
+# Demand
+
+## Demand for Domestic Goods
+
+In an open economy, we need to make .hi[two adjustments] to go from .hi.purple[Domestic Demand for Goods] to .hi.turquoise[Demand for Domestic Goods]
+
+- We must subtract imports $IM/\epsilon$
+
+- We must add exports $X$
+
+__The demand for domestic goods__ can be written as 
+
+$$Z = C + I + G - IM/\epsilon + X$$
+
+---
+# Demand
+
+## Why Subtracting $IM/\epsilon$?
+
+Note .hi[a more careful treatment] for the import component.
+
+The Demand is the total .hi[value measured in domestic goods]. 
+
+$IM$ by itself is the imported __value measured in foreign goods__. 
+
+$IM/\epsilon$ is the imported .hi[value measured in domestic goods]. 
+
+---
+
+# Demand
+
+## Determinants
+
+__The domestic demand for goods__ can be written as
+
+$$D = C + I + G$$
+
+__The demand for domestic goods__ can be written as 
+
+$$Z = C + I + G - IM/\epsilon + X$$
+- $C = C(\underbrace{Y - T}_{+})$ and $I = I(\underbrace{Y, r}_{+, -})$
+
+- $IM = IM(\underbrace{Y, \epsilon}_{+, +})$ and $X = X(\underbrace{Y^*, \epsilon}_{+, -})$
+
+
+__Question__: According to this model, out of $C$, $I$, $IM$, and $X$ which one is an exogeneous variable?
+
+
+---
+
+# Demand for Domestic Goods
+
+## The Demand Side
+
+The Net Export $NX = X - IM(Y, \epsilon)/\epsilon$
+
+__Question__: Is $NX$ an endogeneous variable?
+
+__Answer__: Yes, because $NX$ depends on $Y$ (through $IM$).
+
+__Question__: How does $NX$ change according to $Y$? 
+
+__Answer__: $NX$ decreases as $Y$ increases 
+
+---
+
+# Demand
+
+## Graphically
+
+<center>
+ <img src="figures/graphically1.png" width=500" height="550">
+</center>
+
+---
+
+# Demand
+
+## Graphically
+
+<center>
+ <img src="figures/graphically2.png" width=500" height="550">
+</center>
+
+---
+
+# Demand 
+
+## Trade Balance
+
+Call $Y_{TB}$ (TB for trade balance) __the level of output__ at which .hi[the value of imports] equals .hi[the value of exports], so that net exports are equal to zero. 
+
+__Question__: Does the .hi[equilibrium output] have to be at the $Y_{TB}$?
+
+
+__Answer__: No, it does not have to be. It could be though. 
+
+
+---
+
+# Demand 
+
+## Trade Deficits
+
+Governments do not like to run trade deficits, and for good reasons. The main reason: 
+
+- A country that consistently runs a trade deficit accumulates debt vis à vis the rest of the world, and therefore has to pay __steadily higher interest payments__ to the rest of the world. 
+
+  - Recall: NX = -NCI
+  
+  - If NX is negative (trade deficit), NCI is positive which means there is a net capital inflow. 
+  
+  - If a country experiences net capital inflows. this country is borrowing money from the rest of the world. 
+ 
+---
+
+class: inverse, middle, center
+
+# Equilibrium
+
+---
+
+# Equilibrium
+
+## IS Relation in the Open Market
+
+Equilibrium when domestic output equals the demand
+
+$$Y = Z$$
+Collecting the relations we got for Z, we get
+
+$$Y = C(Y - T) + I(Y, r) + G - IM(Y, \epsilon)/\epsilon + X(Y^*, \epsilon)$$
+This equation describes how __equilibrium output Y__ behaves in the goods market equilibrium. 
+
+Note that NX is an endogeneous variable, so we can also decribe the bahavior of __equilibrium net export NX__. 
+
+---
+
+class: inverse, middle, center
+
+# Fiscal Policy
+
+---
+# Fiscal Policy
+
+## Higher Government Spending
+
+Suppose the economy is at the trade balance NX = 0 in the initial equilibrium. What happens to $Y$ and $NX$ in equilibrium if G goes up? 
+
+We can answer this quesiton using 
+
+- Words for both __equilibrium Y__ and __equilibrium NX__
+
+- Graphs for both __equilibrium Y__ and __equilibrium NX__
+
+---
+
+# Fiscal Policy
+
+## Higher Government Spending - Using Words
+
+- Government Spending goes up. 
+
+- Demand goes up
+
+- __Equilibrium output Y goes up__
+
+- Import goes up
+
+- Export doesn't change
+
+- __Equilibrium Net Export goes down.__
+
+- NX started at 0 - economy runs into .hi[trade deficit].
+---
+
+# Fiscal Policy
+
+## Higher Government Spending - Using Graphs
+
+<center>
+ <img src="figures/higher_spending.png" width=450" height="530">
+</center>
+
+---
+
+# Fiscal Policy
+
+## Increases in Foreign Demand
+
+Suppose the economy is at the trade balance NX = 0 in the initial equilibrium. What happens to __equilibrium output Y__ and __equilibrium net export NX__ if the foreign economy performs well (higher $Y^*$ ). 
+
+This could be due to __an increase in foreign government spending__, __a lower tax in the foreign economy__, or __a higher consumer confidence in the foreign economy__, etc.
+
+
+We can answer this quesiton using 
+
+- Words for .hi[only] __equilibrium Y__ .hi[but not] __equilibrium NX__
+
+- Graphs for both __equilibrium Y__ and __equilibrium NX__
+
+---
+
+# Fiscal Policy
+
+## Increases in Foreign Demand - Using Words
+
+- The foreign economy performs well - $Y^*$ goes up
+
+- Export $X(Y^*, \epsilon)$ goes up 
+
+- __Equilibrium output Y goes up__
+
+- Import goes up
+
+- __Equilibrium Net Export can't be decided (Export goes up and Import goes up)__
+
+---
+
+#Fiscal Policy
+
+## Increases in Foreign Demand - Using Graphs
+
+<center>
+ <img src="figures/higher_foreign.png" width=450" height="530">
+</center>
+
+---
+
+# Fiscal Policy
+
+## Increases in Foreign Demand - Using Graphs
+
+Graphically, we see that if foreign economy performs better, domestically
+
+- Equilibrium output goes up 
+
+- Equilibrium net export goes up
+
+The intuition is that even though both export and import go up, __but the increase in import does not offset the increase in exports__, and .hi[the economy runs into trade surplus].
+
+---
+
+# Fiscal Policy
+
+## Conclusion:
+
+- __An increase in domestic demand__ (expansionary fiscal policy domestically) leads to 
+
+  1. an increase in domestic output 
+  
+  2. a deterioration of the trade balance. 
+
+- __An increase in foreign demand__ (expansionary fiscal policy abroad) leads to 
+
+  1. an increase in domestic output 
+  
+  2. an improvement of the trade balance. 
+
+---
+
+# Fiscal Policy
+
+## Two Implications
+
+- Economic shocks to demand in one country affect all other countries.
+
+<center>
+ <img src="figures/globalrecession.png" width=400" height="200">
+</center>
+
+- Every government wants the foreign government to do expansionary fiscal policy, so they can get a higher output and improvement in trade deficit __"for free"__.  __[Coordination Problem]__
+
+---
+
+class: inverse, middle, center
+
+# Monetary Policy
+
+---
+
+# Monetary Policy
+
+## Depreciation
+
+- Suppose there is __a decrease in the nominal exchange rate $E$__ due to a monetary policy. Real exchange rate, or the relative price for domestic goods, $\epsilon = E P / P^*$ decreases. 
+
+__Question: What happens to the Net Export and Output in Equilibrium?__
+
+.hi[From the equation alone, we don't know how NX changes:] 
+
+$$NX= X(Y^*, \epsilon) - IM(Y,\epsilon)/\epsilon$$
+__Marshall-Lerner condition__: decrease in real exchange rate improves trade balance (NX increases). 
+
+In Equilibrium, a depreciation of domestic currency leads to:
+
+__An improvement of trade balance and a higher output__
+
+---
+
+# Monetary Policy
+
+## Depreciation
+
+Although __a depreciation__ and __an increase in foreign output__ have the same effects on domestic output and the trade balance, there is a .hi[caveat]:
+
+- A depreciation works by __making foreign goods relatively more expensive__. 
+
+- People now have to pay more to buy foreign goods because of the depreciation.
+
+- But equilibrium output, which is the national income, does go up, can the increase in income offset the higher prices for foreign goods? 
+
+---
+
+# Monetary Policy
+
+## Depreciation 
+
+This was the case in Mexico, for example, where the large depreciation of the peso in 1994–1995—from 29 cents per peso in November 1994 to 17 cents per peso in May 1995—led to __a large decline in workers’ living standards and to social unrest.__
+
+---
+
+# Monetary Policy
+
+## Depreciation: Dynamics
+
+Following the depreciation, the effect is likely to be reflected much more in real prices than in quantities. 
+- It takes a while for consumers to realize that relative prices have changed
+
+- It takes a while for firms to shift to cheaper suppliers
+
+__Initially__ neither $X$ nor $IM$ adjust. Only $\epsilon$ decreases. NX decreases.
+
+$$NX= X(Y^*, \epsilon) - IM(Y,\epsilon)/\epsilon$$
+
+__Afterwards__, import goes down, and export goes up. NX increases more than the initial decrease (Marshall-Learner Condition)
+
+---
+
+# Monetary Policy
+
+## Depreciation: Dynamics (J Curve)
+
+A real depreciation leads initially to a deterioration (only $\epsilon$ changes) and then to an improvement ($IM$ and $X$ change subsequently) of the trade balance.
+
+<center>
+ <img src="figures/J-curve.png" width=600" height="350">
+</center>
+
+---
+
+# Monetary Policy
+
+## Depreciation: Dynamics (J Curve)
+
+There is __a lag in the response of NX__ to the changes in real exchange rate. 
+<center>
+ <img src="figures/J-curve-data.png" width=600" height="350">
+</center>
+
+
+
+---
+exclude: true
+
+```{R, generate pdfs, include = F}
+system("decktape remark 15_openness_goodsmarket.html 15_openness_goodsmarket.pdf --chrome-arg=--allow-file-access-from-files")
+```
+
+
+

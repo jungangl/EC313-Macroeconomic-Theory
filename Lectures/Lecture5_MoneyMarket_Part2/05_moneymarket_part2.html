@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Money Market - Part 2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Alex Li" />
+    <link href="05_moneymarket_part2_files/remark-css/default.css" rel="stylesheet" />
+    <link href="05_moneymarket_part2_files/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="05_moneymarket_part2_files/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my-css.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Money Market - Part 2
+## EC 313, Macroeconomics
+### Alex Li
+
+---
+
+class: inverse, center, middle
+
+
+
+# Book Chapter 4
+
+---
+class: inverse, middle, center
+
+# Overview
+
+---
+
+# Overview
+
+## Overview
+
+&lt;center&gt;
+ &lt;img src="figures/financial.png" width="600" height="450"&gt;
+&lt;/center&gt;
+
+---
+
+# Overview
+
+## Overview
+
+In the last lecture, we derived the .hi[LM equation], which describes the interest rate at the equilibrium of the money market. 
+
+`\begin{align}
+M &amp; = $Y * L(i)
+\end{align}`
+
+However, we made a simplifying assumption - there are __no commercial banks__, which means there is currency but no checkable deposits. 
+
+Also, we talked about the central bank has the power to decide the __money supply__, but we still don't know the mechanism of injecting money into the economy. 
+
+---
+
+# Overview
+
+## Overview
+
+In this lecture, we will go over.
+
+- Adding __Commercial Banks__ in our Money Market Model
+
+- Monetary Policy: __Open Market Operations__
+
+- Monetary Policy: __Reserve Requirement__
+
+- Among Commercial Banks: __Reserve Market__
+
+- Monetary Policy: __Discount Rate__
+
+- Monetary Policy: __Interest On Reserves__
+
+---
+
+class: inverse, center, middle
+
+# Commercial Banks
+
+---
+
+# Commercial Banks
+
+&lt;center&gt;
+ &lt;img src="figures/commercialbanks.jpg" width="600" height="500"&gt;
+&lt;/center&gt;
+
+---
+
+# Commercial Banks
+
+## What Banks Do?
+
+Commercial Banks are the most important __financial intermediaries__ in an economy. A few things to note:
+
+- Commercial Banks __sell__ future money (bonds) of __different liquidity with different interest rate__ to .purple[households]. .hi[Commercial Banks themselves are not the source of the now money]. 
+
+  - Allen has $6000 left in the bank with __0%__ annual interest rate with high liquidity. He is backpacking in Southeast Asia for a year and plans to spend $500 every month.  
+  
+---
+
+# Commercial Banks
+
+## What Banks Do?
+
+Commercial Banks are the most important __financial intermediaries__ in an economy. A few things to note:
+
+- Commercial Banks __sell__ future money (bonds) of __different liquidity with different interest rate__ to .purple[households]. .hi[Commercial Banks themselves are not the source of the now money]. 
+
+  - Mary has $1 million saved in the bank with __3%__ annual interest rate with low liquidity. According to the contract, she can't use the $1 million for the next 12 months but will receive $1.03 million afterward. 
+  
+---
+
+# Commercial Banks
+
+## What Banks Do?
+
+Commercial Banks are the most important __financial intermediaries__ in an economy. A few things to note:
+
+- Commercial Banks __buy__ future money (bonds) of __different liquidity with different interest rate__ from .purple[households] and .purple[firms], and .hi[this helps increase consumption and investment in the economy]. 
+
+--
+
+  - Alex needs to buy a __road bike__ for $5000 (__C__), but he doesn't have enough money right now. He took a loan from a local commercial bank to finance his purchase. The loan requires him to pay the bank $500 every month for the next 12 months. 
+  
+---
+
+# Commercial Banks
+
+## What Banks Do?
+
+Commercial Banks are the most important __financial intermediaries__ in an economy. A few things to note:
+
+- Commercial Banks __buy__ future money (bonds) of __different liquidity with different interest rate__ from .purple[households] and .purple[firms], and .hi[this helps increase consumption and investment in the economy].
+  
+  - Maria has an excellent business idea, and she wants to borrow some money from the bank to realize the idea. After checking her financial status, the local bank decides to give her $1 million to buy __equipments__ (__I__) to start, and she needs to pay the bank $1.1 million in a year. 
+  
+---
+
+# Commercial Banks
+
+## Why Banks?
+
+Why do we need these commercial banks as intermediaries? 
+
+Why can't Alex borrow money directly from Allen? 
+
+  - The bank gets to pocket $1000 from this transaction. 
+  
+--
+
+Why can't Maria borrow money directly from Mary? 
+
+  - The bank gets to pocket $0.07 million from this transaction. (A lot of money!)
+
+
+---
+
+# Commercial Banks
+
+## Why Banks? 
+
+Why can't Alex borrow money directly from Allen? - The bank gets to pocket $1000 from this transaction. 
+
+--
+
+ - It takes time for them to find each other. 
+ 
+--
+  
+ - Alex would have to build a few ATM's for Allen, depending on where Allen wants to go in Southeast Asia.
+ 
+--
+ 
+ - Allen needs to do a background check on Alex if he can pay back the money. 
+ 
+--
+ 
+ - Allen needs to pay a lawyer lots of money (more than $1000) to write a very detailed contract.
+
+---
+
+# Commercial Banks
+
+## Why Banks?
+
+Why can't Maria borrow money directly from Mary? - The bank gets to pocket $0.07 million from this transaction. (A lot of money!)
+
+--
+
+  - It takes time for them to find each other. 
+  
+--
+
+  - Mary has to make sure Maria won't escape with the $1 million!
+  
+--
+  
+  - Maria probably needs to borrow against her house, which requires some expensive legal service. 
+  
+---
+
+# Commercial Banks
+
+## Why Banks?
+
+If there were no commercial banks, Alex wouldn't be able to buy the road bike (at least sooner), and Maria wouldn't be able to realize her business idea. GDP suffers! We will get back to this in a few weeks.   
+
+__Which banks got bailed out in 2008?__
+
+"Lehman Brothers went bankrupt. *Merrill Lynch, AIG, Freddie Mac, Fannie Mae, HBOS, Royal Bank of Scotland, Bradford &amp; Bingley, Fortis, Hypo and Alliance &amp; Leicester* all came within a whisker of doing so and __had to be rescued__"
+
+---
+
+# Commercial Banks
+
+## Reserves
+
+- Each commercial bank wants to lend out as much money (buy future money) as possible
+
+- But each bank also wants to (and also is required to) keep some __cash in their vault__ (.hi[reserves]) to avoid bank run (a Self-fulfilling Prophecy). This is for both precautionary and for regulatory reasons.
+
+&lt;center&gt;
+ &lt;img src="figures/bankvault.jpg" width="450" height="250"&gt;
+&lt;/center&gt;
+
+---
+
+# Commercial Banks
+
+## Reserves
+
+How much __reserves__ does a bank need to keep in their vault? 
+
+- Reserves are used for people to __withdraw cash__. 
+
+- People withdraw cash from their __checkable deposits__. 
+
+- If a bank has larger checkable deposits, it needs to prepare more reserves. 
+
+`\begin{align}
+R^d = \theta D^d
+\end{align}`
+
+`\(R^d\)` __is the reserves demand from banks__. 
+
+`\(\theta\)` __is the reserve ratio__. 
+
+`\(D^d\)` __is the dollar amount of checkable deposits demand from households__. 
+
+
+---
+
+# Commercial Banks
+
+## Checkable Deposits
+
+Here is the question, how much checkable deposits are demanded by households `\(D^d\)`? 
+
+Recall that .hi[checkable deposits] is just a form of money, and the other form is .hi[currency]. 
+
+--
+
+Also, recall the money demand is `\(M^D\)` - let's assume people hold:
+
+`\(c\)` proportion of their money in currency
+
+`\(1 - c\)` proportion of their money in checkable deposits. 
+
+- The demand for checkable deposits is `\(D^d = (1 - c) M^d\)`
+
+- The demand for currency is `\(CU^d = c M^d\)`
+
+---
+
+class: inverse, center, middle
+
+# (Central Bank) Money Market 
+
+---
+
+# (Central Bank) Money Market 
+
+## Demand for Central Bank Money
+
+Central Bank Money can be used as 
+
+- currency held by __households__ 
+
+- reserves held by __commercial banks__ in their vaults
+
+&lt;center&gt;
+ &lt;img src="figures/centralbankmoney.jpeg" width="300" height="150"&gt;
+&lt;/center&gt;
+
+Demand for Central Bank Money: 
+
+`$$H^d = CU^d + R^d$$`
+---
+
+# (Central Bank) Money Market 
+
+## Demand for Central Bank Money
+
+`\begin{align}
+H^d &amp; = \color{#e64173}{CU^d} + \color{#20B2AA}{R^d}\\
+    &amp; = \color{#e64173}{c M^d} + \color{#20B2AA}{\theta D^d}\\
+    &amp; = \color{#e64173}{c M^d} + \color{#20B2AA}{\theta (1 - c) M^d}\\
+    &amp; = [c + \theta (1 - c)] \color{#6A5ACD}{M^d}\\
+    &amp; = [c + \theta (1 - c)] \color{#6A5ACD}{$Y L(i)}\\
+\end{align}`
+
+
+---
+
+# (Central Bank) Money Market
+
+## Supply for Central Bank Money
+
+Supply for __Central Bank Money__ is achieved by .hi[Open Market Operations (OMO)] by __the Federal Open Market Committee (FOMC)__. 
+
+- FOMC decides how much __government securities__ they want to sell to or buy in the open market. These government securities are very safe assets. 
+
+--
+
+- When FOMC buys government securities, they inject central bank money into the economy (__Expansionary OMO__). 
+--
+
+- When FOMC sells government securities, they take central bank money out of the economy (__Contractionary OMO__).
+
+---
+
+# (Central Bank) Money Market
+
+## Supply for Central Bank Money
+
+Through __OMO__, the Fed can control the .hi[supply of Central Bank Money] `\(H^S\)` in the economy.
+
+- Again, since the model doesn't explain the level of `\(H^S\)`, we say it is exogeneous. 
+
+`$$H^S = H$$`
+
+- __OMO__ is one of the most important tools for the Federal Reserve Bank.  
+
+---
+
+# (Central Bank) Money Market
+
+## Equilibrium
+
+Demand for Central Bank Money = Supply for Central Bank Money
+
+`$$H^D = H^S$$`
+
+&lt;center&gt;
+ &lt;img src="figures/equi1.png" width="700" height="300"&gt;
+&lt;/center&gt;
+
+
+---
+
+# (Central Bank) Money Market
+
+## Equilibrium
+
+Demand for Central Bank Money = Supply for Central Bank Money
+
+`$$H^D = H^S$$`
+
+&lt;center&gt;
+ &lt;img src="figures/equi2.png" width="700" height="300"&gt;
+&lt;/center&gt;
+
+---
+
+# (Central Bank) Money Market
+
+## Equilibrium
+
+Demand for Central Bank Money = Supply for Central Bank Money
+`\begin{align}
+\color{#e64173}{H^D} &amp; = \color{#20B2AA}{H^S} \\
+\color{#e64173}{[c + \theta (1 - c)] $Y L(i)} &amp; = \color{#20B2AA}{H}
+\end{align}`
+Note that `\(H^D\)` is still a decreasing function in `\(i\)`, we have the following Equilibrium Graph. `\(H^S\)` is independent from the interest rate `\(i\)`. 
+&lt;center&gt;
+ &lt;img src="figures/equil3.png" width="350" height="260"&gt;
+&lt;/center&gt;
+
+---
+
+# (Central Bank) Money Market
+
+## Connection to the Money Market
+
+Now the Equilibrium for the Central Bank Money Market is as follows.
+
+`\begin{align}
+[c + \theta (1 - c)] \color{#e64173}{$Y L(i)} &amp; = H
+\end{align}`
+
+--
+
+Recall the Money Demand is 
+
+`\begin{align}
+M^D &amp; = \color{#e64173}{$Y L(i)}
+\end{align}`
+
+--
+
+We have
+
+`\begin{align}
+[c + \theta (1 - c)] M^D &amp; = H
+\end{align}`
+
+--
+
+Or
+
+`\begin{align}
+M^D &amp; = \frac{1}{[c + \theta (1 - c)]}H
+\end{align}`
+
+---
+
+# (Central Bank) Money Market
+
+## Connection to the Money Market
+
+`\begin{align}
+\overbrace{M^D}^{\text{Money Demand}} &amp; = \overbrace{\frac{1}{[c + \theta (1 - c)]}H}^{\text{Money Supply}}
+\end{align}`
+
+In the equilibrium, the money supply is 
+
+`$$M^S = \underbrace{\frac{1}{[c + \theta (1 - c)]}}_{\text{Money Multiplier}}H$$`
+According to this equation, when the central bank increases central bank money (H) by 1 dollar, the actual money supply goes up by `\(\frac{1}{[c + \theta (1 - c)]}\)` dollars. Note that the .hi[money mulitipler] is larger than 1. 
+
+---
+
+# (Central Bank) Money Market
+
+## Monetary Multiplier
+
+To understand monetary multiplier, let's make a simplifying assumption: 
+
+- __households only want to hold checkable deposits and no cash__. 
+
+- That is to say c = 0, and multiplier is `\(\frac{1}{\theta}\)`. 
+
+---
+
+# (Central Bank) Money Market
+
+## Monetary Multiplier
+
+- The FOMC buys __1 dollar__ worth of bond in the open market from __Seller 1__.
+
+--
+
+- .hi[Seller 1] doesn't hold cash, so they deposit this `\(\color{#e64173}{1}\)` dollar at .hi.purple[Bank A]. 
+
+- .hi.purple[Bank A] now has `\(\color{#e64173}{1}\)` dollar checkable deposits, so it is required to hold `\(\theta * \color{#e64173}{1}\)` dollars as reserves in the vault and uses the rest of `\((1 - \theta) * \color{#e64173}{1}\)` dollars to buy bonds from .hi[Seller 2]
+
+--
+
+- .hi[Seller 2] doesn't hold cash, so they deposit this `\(\color{#e64173}{(1- \theta)}\)` dollar at .hi.purple[Bank B].
+
+- .hi.purple[Bank B] now has `\(\color{#e64173}{(1- \theta)}\)` dollar checkable deposits, so it is required to hold `\(\theta * \color{#e64173}{(1- \theta)}\)` dollars as reserves in the vault and uses the rest of `\((1 - \theta) * \color{#e64173}{(1- \theta)}\)` dollars to buy bonds from .hi[Seller 3]
+
+---
+
+# (Central Bank) Money Market
+
+## Monetary Multiplier
+
+--
+
+- .hi[Seller 3] doesn't hold cash, so they deposit this `\(\color{#e64173}{(1 - \theta)^2}\)` dollar at .hi.purple[Bank C].
+
+- .hi.purple[Bank C] now has `\(\color{#e64173}{(1 - \theta)^2}\)` dollar checkable deposits, so it is required to hold `\(\theta * \color{#e64173}{(1 - \theta)^2}\)` dollars as reserves in the vault and uses the rest of `\((1 - \theta) * \color{#e64173}{(1 - \theta)^2}\)` dollars to buy bonds from .hi[Seller 4]. 
+
+--
+
+- .hi[Seller 4] doesn't hold cash, so they deposit this `\(\color{#e64173}{(1- \theta)^3}\)` dollar at .hi.purple[Bank D].
+
+- `\(\cdots\)`
+
+---
+
+# (Central Bank) Money Market
+
+## Monetary Multiplier
+
+- .hi[Seller 1] holds `\(\color{#e64173}{1}\)` dollar checkable deposits
+
+--
+
+- .hi[Seller 2] holds `\(\color{#e64173}{(1 - \theta)}\)` checkable deposits
+
+--
+
+- .hi[Seller 3] holds `\(\color{#e64173}{(1 - \theta)^2}\)` checkable deposits
+
+--
+
+- .hi[Seller 4] holds `\(\color{#e64173}{(1 - \theta)^3}\)` checkable deposits
+
+--
+
+- `\(\cdots\)`
+
+
+The total money supply (which only contains checkable deposits in this world because `\(c=0\)`) is as follows:
+
+`$$1 + (1 - \theta) + (1 - \theta)^2 + (1 - \theta)^3 + ... = \frac{1}{1 - (1 - \theta)} = \frac{1}{\theta}$$`
+---
+
+---
+
+# (Central Bank) Money Market
+
+## Monetary Multiplier
+
+- .hi.purple[Central Bank] bought `\(\color{#e64173}{1}\)` dollar worth of bonds
+
+--
+
+- .hi.purple[Bank A] bought `\(\color{#e64173}{(1 - \theta)}\)` dollar worth of bonds
+
+--
+
+- .hi.purple[Bank B] bought `\(\color{#e64173}{(1 - \theta)^2}\)` dollar worth of bonds
+
+--
+
+- .hi.purple[Bank C] bought `\(\color{#e64173}{(1 - \theta)^3}\)` dollar worth of bonds
+
+--
+
+- `\(\cdots\)`
+
+--
+
+Ultimate increase in the money supply is a result of __successive rounds of purchases of bonds__:
+
+- First, the Fed, in its open market operation. 
+
+- and then, the following rounds by commercial banks. (Money Creation)
+
+---
+
+class: inverse, center, middle 
+
+# Federal Funds Market
+
+---
+
+# Federal Funds Market
+
+## Federal Funds Market
+
+
+Neither __Money Market__ nor __Central Bank Money Market__ physically exists in the United States. These markets are constructed to facilitate the .hi[equilibrium theory] and conduct .hi[equilibrium analysis]. 
+
+--
+
+Although our former analysis still holds, we still should consider the market that actually exists, which is the __Federal Funds Market__.
+
+---
+
+# Federal Funds Market
+
+## Federal Funds Market
+
+Each commercial bank is required to hold a minimum __reserves__, `\(\theta * D^d\)`, in their vault. 
+
+--
+
+In the morning, all commercial banks get prepare in their vault:
+
+- __Required reserves__
+
+- __Some extra reserves__ for households to withdraw. 
+
+---
+
+# Federal Funds Market
+
+## Federal Funds Market
+
+However, each bank __can't predict__ exactly how much extra reserves they need for that day.
+
+Some banks have __extra reserves__, and some banks have __insufficient reserves__.
+
+--
+
+All the commercial banks "get together" in a place called .hi[Federal Funds Market]. 
+
+--
+
+Banks with extra reserves __sell the excess reserves__ to the market. 
+
+--
+
+Banks with insufficient reserves __buy reserves__ from the market. 
+
+--
+
+The equilibrium interest rate is called .hi[Federal Funds Rate (FFR)] 
+
+---
+
+# Federal Funds Market
+
+## Equilibrium
+
+The .hi[Federal Funds Market Equilibrium] can be derived from the __Central Bank Money Market Equilibrium__. First recall
+`\begin{align}
+\underbrace{H}_{\text{Central Bank Money Supply}} &amp; = \underbrace{CU^d + R^d}_{\text{Central Bank Money Demand}}\\
+\underbrace{H - CU^d}_{\text{Reserves Supply}} &amp; = \underbrace{R^d}_{\text{Reserves Demand}}\\
+\underbrace{H - c $Y L(i)}_{\text{Reserves Supply}} &amp; = \underbrace{\theta (1 - c) $Y L(i)}_{\text{Reserves Demand}}\\
+\end{align}`
+
+--
+
+- Recall `\(L(i)\)` is decreasing in `\(i\)`
+
+--
+
+- Left-hand Side: Reserve Supply is increasing in `\(i\)`
+
+--
+
+- Right-hand Side: Reserve Demand is decreasing in `\(i\)`
+
+---
+
+# Federal Funds Market
+
+## Equilibrium - Example
+
+&lt;center&gt;
+ &lt;img src="figures/ffr.png" width="400" height="400"&gt;
+&lt;/center&gt;
+
+--
+
+What happens to __Federal Funds Rate (FFR)__ if the __FOMC__ conducts an __expansionary open market operation__? 
+
+---
+
+# Federal Funds Market
+
+## Discount Rate
+
+The Fed also supplies reserves in the federal funds market.
+
+Commercial Banks can always buy reserves from the Fed through the "__discount window__"
+
+The __discount rate__ refers to the interest rate charged to the commercial banks. 
+
+---
+
+# Federal Funds Market
+
+## Discount Rate
+
+Question: when the market rate is __higher than the discount rate__, who will be the only supply for reserves in the federal funds market? 
+
+Answer: __The Fed__
+
+The Discount Rate is the __upper bound for the FFR__ in the federal funds market, and the Fed has control over the upper bound. 
+
+---
+
+# Federal Funds Market
+
+## Interest Rate on Reserves (IOR)
+
+The Fed pays interests to the reserves commercial banks hold in their vault. This rate is called __Interest Rate on Reserves (IOR)__. 
+
+This sounds a little odd, but doing this gives the Fed the power to set __the lower bound for FFR__. 
+
+Question: when the market rate is __lower than IOR__, will there be any supplies for reserves?
+
+Answer: No
+
+---
+
+# Federal Funds Market
+
+## Upper and Lower Bound
+
+&lt;center&gt;
+ &lt;img src="figures/DR_IOR.png" width="500" height="400"&gt;
+&lt;/center&gt;
+
+---
+
+# Federal Funds Market
+
+## Upper and Lower Bound
+
+&lt;center&gt;
+ &lt;img src="figures/DR_IOR_RIGHT.png" width="500" height="400"&gt;
+&lt;/center&gt;
+
+
+---
+
+# Federal Funds Market
+
+## Upper and Lower Bound
+
+&lt;center&gt;
+ &lt;img src="figures/DR_IOR_LEFT.png" width="500" height="400"&gt;
+&lt;/center&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
