@@ -1,6 +1,6 @@
 # EC 313 Macroeconomic Theory (Fall 2020)
 
-I created this course for **EC 313: Macroeconomic Theory** (Fall 2020) at the University of Oregon. ([Syllabus](https://rawcdn.githack.com/jungangl/EC313-Macroeconomic-Theory/0311c2f789cb1331799d63be3bd5ed9258affea5/Syllabus/Syllabus313.pdf)). Only the lectures are published on Github. If you would like to have the other resources for this course, please [contact me](www.linkedin.com/in/alexjgl) directly.
+I created this course for **EC 313: Macroeconomic Theory** (Fall 2020) at the University of Oregon. ([Syllabus](https://rawcdn.githack.com/jungangl/EC313-Macroeconomic-Theory/0311c2f789cb1331799d63be3bd5ed9258affea5/Syllabus/Syllabus313.pdf)). Only the lectures are published on Github. If you would like to have the other resources for this course, please [contact me](https://www.linkedin.com/in/alexjgl) directly.
 
 ## Lectures
 
